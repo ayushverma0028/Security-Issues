@@ -1,0 +1,22 @@
+UVdesk v1.1.7 is vulnerable for Stored XSS Vulnerability.
+
+Vulnerable URL : https://demo.uvdesk.com/uvdesk-demo-<IP>/en/customer/ticket/view/1
+
+Issue : Attacker can steal the cookies of Logged-In users.
+
+Affected Version: UVdesk v1.1.7
+
+Fixed Version: UVdesk v1.1.8
+
+Payload Used : <img src=x onerror=alert("Hacked");>
+
+Steps to Reproduce :
+1. Login as a customer in Uvdesk Demo and go to Ticket request tab.
+2. Now open any ticket and type any message in Write a Reply textbox.
+3. Click on Reply button and intercept the request.
+4. Here in Interceptor, Add the XSS Payload and forward this request.
+5. Now our image will be added in the threads. Each time a page refresh, our payload will be executed on the screen.
+
+References : 
+1. https://github.com/uvdesk/community-skeleton/releases/tag/v1.1.8#:~:text=Fixed%20Cross%2DSite%20Scripting%20(XSS)%20security%20issues.
+2. https://github.com/uvdesk/core-framework/commit/7243eb3f0f79ba6308ea45fabc5dbc6ecffb74cd
