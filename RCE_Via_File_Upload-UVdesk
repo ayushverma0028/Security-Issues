@@ -1,0 +1,22 @@
+UVdesk v1.1.7 is vulnerable for RCE Via File Upload Vulnerability
+
+Vulnerable URL : https://localhost/uvdesk/en/customer/account
+
+Issue : Attacker can perform Remote Code Execution via Upload profile image option.
+
+Affected Version: UVdesk v1.1.7
+
+Fixed Version: UVdesk v1.1.8
+
+Payload Used : <?php echo system($_GET['cmd']); ?>
+
+Steps to Reproduce :
+1. Login as a customer in Uvdesk Demo and go to your profile option.
+2. Now upload any image file in the upload image option.
+3. Click on Save Changes button and intercept the request.
+4. Here in Interceptor, change the filename extension to php and add the above payload in between image content and forward this request.
+5. Now our image file will be uploaded and open that image in new tab, we can see the uploaded image name with .php extension and add ?cmd=<command> after image name and now we can execute any command via this file.
+
+References : 
+1. https://github.com/uvdesk/community-skeleton/releases/tag/v1.1.8
+2. https://github.com/uvdesk/core-framework/commit/7243eb3f0f79ba6308ea45fabc5dbc6ecffb74cd
